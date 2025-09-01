@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Pago - SkyWings</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✈️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-plane"></i>
+                <span>SkyWings</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Colombia.svg" alt="Bandera de Colombia" class="colombia-flag">
+            </div>
+            <div class="nav-actions">
+                <a href="index.html" class="back-btn">
+                    <i class="fas fa-home"></i>
+                    Inicio
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Confirmation Section -->
+    <section class="confirmation-section">
+        <div class="container">
+            <div class="confirmation-container">
+                <!-- Success Animation -->
+                <div class="success-animation">
+                    <div class="success-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <h1>¡Pago Exitoso!</h1>
+                    <p>Su reserva ha sido confirmada y procesada correctamente.</p>
+                </div>
+
+                <!-- Booking Details -->
+                <div class="booking-details">
+                    <h2><i class="fas fa-ticket-alt"></i> Detalles de la Reserva</h2>
+                    
+                    <div class="booking-number">
+                        <span class="label">Número de Reserva:</span>
+                        <span class="value">SW-2024-123456</span>
+                    </div>
+
+                    <div class="flight-summary">
+                        <div class="route">
+                            <div class="origin">
+                                <h3>Bogotá</h3>
+                                <p>BOG</p>
+                                <span>15 Dic 2024 - 08:00</span>
+                            </div>
+                            <div class="flight-line">
+                                <i class="fas fa-plane"></i>
+                            </div>
+                            <div class="destination">
+                                <h3>Miami</h3>
+                                <p>MIA</p>
+                                <span>15 Dic 2024 - 11:45</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="passenger-info">
+                        <h3>Información de Pasajeros</h3>
+                        <div class="passenger-list">
+                            <div class="passenger">
+                                <span class="name">Juan Carlos Pérez</span>
+                                <span class="type">Adulto</span>
+                                <span class="seat">12A</span>
+                            </div>
+                            <div class="passenger">
+                                <span class="name">María Elena Pérez</span>
+                                <span class="type">Adulto</span>
+                                <span class="seat">12B</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="payment-info">
+                        <h3>Información de Pago</h3>
+                        <div class="payment-details">
+                            <div class="payment-item">
+                                <span class="label">Método de Pago:</span>
+                                <span class="value">Tarjeta de Crédito</span>
+                            </div>
+                            <div class="payment-item">
+                                <span class="label">Tarjeta:</span>
+                                <span class="value">**** **** **** 1234</span>
+                            </div>
+                            <div class="payment-item">
+                                <span class="label">Monto Total:</span>
+                                <span class="value">$1.900.000</span>
+                            </div>
+                            <div class="payment-item">
+                                <span class="label">Estado:</span>
+                                <span class="value success">Pagado</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Steps -->
+                <div class="next-steps">
+                    <h2><i class="fas fa-list-check"></i> Próximos Pasos</h2>
+                    <div class="steps-list">
+                        <div class="step">
+                            <div class="step-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="step-content">
+                                <h3>Email de Confirmación</h3>
+                                <p>Recibirá un email con todos los detalles de su reserva en los próximos minutos.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div class="step-content">
+                                <h3>Check-in Online</h3>
+                                <p>Puede realizar el check-in online 24 horas antes del vuelo.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-icon">
+                                <i class="fas fa-suitcase"></i>
+                            </div>
+                            <div class="step-content">
+                                <h3>Equipaje</h3>
+                                <p>Recuerde verificar las políticas de equipaje de la aerolínea.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="downloadTicket()">
+                        <i class="fas fa-download"></i>
+                        Descargar Tiquete
+                    </button>
+                    <button class="btn btn-secondary" onclick="sendEmail()">
+                        <i class="fas fa-envelope"></i>
+                        Enviar por Email
+                    </button>
+                    <button class="btn btn-outline" onclick="window.print()">
+                        <i class="fas fa-print"></i>
+                        Imprimir
+                    </button>
+                </div>
+
+                <!-- Support Info -->
+                <div class="support-info">
+                    <h3><i class="fas fa-headset"></i> ¿Necesita Ayuda?</h3>
+                    <p>Nuestro equipo de soporte está disponible 24/7 para ayudarle.</p>
+                    <div class="support-contacts">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+57 321 781 3700</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>soporte@aeroventas.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-comments"></i>
+                            <span>Chat en vivo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <i class="fas fa-plane-departure"></i>
+                        <h3>AeroVentas</h3>
+                        <span class="footer-tagline">Premium Travel Solutions</span>
+                    </div>
+                    <p>Su agencia de viajes de confianza para vuelos nacionales e internacionales.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p><i class="fas fa-phone"></i> +57 321 781 3700</p>
+                    <p><i class="fas fa-envelope"></i> soporte@aeroventas.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 AeroVentas. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="confirmation.js"></script>
+</body>
+</html>
+

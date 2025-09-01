@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SkyWings - La mejor agencia de viajes para vuelos nacionales e internacionales. Encuentra los mejores precios y reserva tus tiquetes de vuelo.">
+    <meta name="keywords" content="vuelos, tiquetes, aerolíneas, viajes, reservas, avión, pasajes">
+    <meta name="author" content="SkyWings">
+    <meta property="og:title" content="SkyWings - Reserva de Vuelos">
+    <meta property="og:description" content="Encuentra los mejores precios en vuelos nacionales e internacionales">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1200">
+    <meta property="og:url" content="https://skywings.com">
+    <title>SkyWings - Reserva de Vuelos | Los Mejores Precios en Tiquetes</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✈️</text></svg>">
+</head>
+<body>
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner">
+        <div class="spinner"></div>
+                    <p>Cargando SkyWings...</p>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-plane"></i>
+                <span>SkyWings</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Colombia.svg" alt="Bandera de Colombia" class="colombia-flag">
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#vuelos">Vuelos</a></li>
+                <li><a href="#ofertas">Ofertas</a></li>
+                <li><a href="#destinos">Destinos</a></li>
+                <li><a href="#aerolineas">Aerolíneas</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="payment.html">Pagos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="login-btn" onclick="openLoginModal()">
+                    <i class="fas fa-user"></i>
+                    Iniciar Sesión
+                </button>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#home">Inicio</a></li>
+            <li><a href="#vuelos">Vuelos</a></li>
+            <li><a href="#ofertas">Ofertas</a></li>
+            <li><a href="#destinos">Destinos</a></li>
+            <li><a href="#aerolineas">Aerolíneas</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="payment.html">Pagos</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Encuentra los Mejores Precios en Vuelos</h1>
+            <p>Reserva tus tiquetes nacionales e internacionales con las mejores aerolíneas del mundo</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">50K+</span>
+                    <span class="stat-label">Clientes Satisfechos</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label">Destinos</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Soporte</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Search Form -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-form">
+                <h2>Buscar Vuelos</h2>
+                <form id="flightSearchForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="tripType">Tipo de Viaje</label>
+                            <select id="tripType" required>
+                                <option value="roundtrip">Ida y Vuelta</option>
+                                <option value="oneway">Solo Ida</option>
+                                <option value="multi">Múltiples Destinos</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="passengers">Pasajeros</label>
+                            <select id="passengers" required>
+                                <option value="1">1 Pasajero</option>
+                                <option value="2">2 Pasajeros</option>
+                                <option value="3">3 Pasajeros</option>
+                                <option value="4">4 Pasajeros</option>
+                                <option value="5">5+ Pasajeros</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="from">Desde</label>
+                            <input type="text" id="from" placeholder="Ciudad de origen" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="to">Hacia</label>
+                            <input type="text" id="to" placeholder="Ciudad de destino" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="departDate">Fecha de Salida</label>
+                            <input type="date" id="departDate" required>
+                        </div>
+                        <div class="form-group" id="returnDateGroup">
+                            <label for="returnDate">Fecha de Regreso</label>
+                            <input type="date" id="returnDate">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="class">Clase</label>
+                            <select id="class" required>
+                                <option value="economy">Económica</option>
+                                <option value="premium">Premium Economy</option>
+                                <option value="business">Business</option>
+                                <option value="first">Primera Clase</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="airline">Aerolínea</label>
+                            <select id="airline">
+                                <option value="">Todas las aerolíneas</option>
+                                <option value="avianca">Avianca</option>
+                                <option value="latam">LATAM Airlines</option>
+                                <option value="american">American Airlines</option>
+                                <option value="delta">Delta Airlines</option>
+                                <option value="united">United Airlines</option>
+                                <option value="iberia">Iberia</option>
+                                <option value="airfrance">Air France</option>
+                                <option value="british">British Airways</option>
+                                <option value="lufthansa">Lufthansa</option>
+                                <option value="klm">KLM</option>
+                                <option value="aeromexico">Aeroméxico</option>
+                                <option value="copa">Copa Airlines</option>
+                                <option value="aircanada">Air Canada</option>
+                                <option value="jetblue">JetBlue</option>
+                                <option value="spirit">Spirit Airlines</option>
+                                <option value="volaris">Volaris</option>
+                                <option value="interjet">Interjet</option>
+                                <option value="taca">TACA</option>
+                                <option value="lan">LAN Airlines</option>
+                                <option value="tam">TAM Airlines</option>
+                                <option value="gol">GOL Airlines</option>
+                                <option value="azul">Azul Airlines</option>
+                                <option value="avianca-brasil">Avianca Brasil</option>
+                                <option value="easyjet">EasyJet</option>
+                                <option value="ryanair">Ryanair</option>
+                                <option value="norwegian">Norwegian Air</option>
+                                <option value="turkish">Turkish Airlines</option>
+                                <option value="emirates">Emirates</option>
+                                <option value="qatar">Qatar Airways</option>
+                                <option value="etihad">Etihad Airways</option>
+                                <option value="singapore">Singapore Airlines</option>
+                                <option value="cathay">Cathay Pacific</option>
+                                <option value="japan">Japan Airlines</option>
+                                <option value="ana">ANA</option>
+                                <option value="korean">Korean Air</option>
+                                <option value="china">China Airlines</option>
+                                <option value="eva">EVA Air</option>
+                                <option value="thai">Thai Airways</option>
+                                <option value="malaysia">Malaysia Airlines</option>
+                                <option value="garuda">Garuda Indonesia</option>
+                                <option value="qantas">Qantas</option>
+                                <option value="virgin">Virgin Australia</option>
+                                <option value="airnz">Air New Zealand</option>
+                                <option value="fiji">Fiji Airways</option>
+                                <option value="hawaiian">Hawaiian Airlines</option>
+                                <option value="alaska">Alaska Airlines</option>
+                                <option value="southwest">Southwest Airlines</option>
+                                <option value="frontier">Frontier Airlines</option>
+                                <option value="allegiant">Allegiant Air</option>
+                                <option value="westjet">WestJet</option>
+                                <option value="porter">Porter Airlines</option>
+                                <option value="airtransat">Air Transat</option>
+                                <option value="sunwing">Sunwing Airlines</option>
+                                <option value="aircanada-rouge">Air Canada Rouge</option>
+                                <option value="swoop">Swoop</option>
+                                <option value="flair">Flair Airlines</option>
+                                <option value="lynx">Lynx Air</option>
+                                <option value="canjet">CanJet</option>
+                                <option value="jetsgo">Jetsgo</option>
+                                <option value="skyservice">Skyservice</option>
+                                <option value="nationair">Nationair</option>
+                                <option value="royal">Royal Airlines</option>
+                                <option value="firstair">First Air</option>
+                                <option value="northern">Northern Air</option>
+                                <option value="calmair">Calm Air</option>
+                                <option value="bearskin">Bearskin Airlines</option>
+                                <option value="wasaya">Wasaya Airways</option>
+                                <option value="aircreebec">Air Creebec</option>
+                                <option value="airinuit">Air Inuit</option>
+                                <option value="airnorth">Air North</option>
+                                <option value="centralmountain">Central Mountain Air</option>
+                                <option value="pacificcoastal">Pacific Coastal Airlines</option>
+                                <option value="harbourair">Harbour Air</option>
+                                <option value="seair">Seair Seaplanes</option>
+                                <option value="saltspring">Salt Spring Air</option>
+                                <option value="gulfislands">Gulf Islands Air</option>
+                                <option value="westcoast">West Coast Air</option>
+                                <option value="orca">Orca Airways</option>
+                                <option value="centralair">Central Air</option>
+                                <option value="northernthunder">Northern Thunderbird Air</option>
+                                <option value="inlandair">Inland Air</option>
+                                <option value="alpineair">Alpine Air</option>
+                                <option value="greatlakes">Great Lakes Airlines</option>
+                                <option value="mesa">Mesa Airlines</option>
+                                <option value="republic">Republic Airways</option>
+                                <option value="skywest">SkyWest Airlines</option>
+                                <option value="expressjet">ExpressJet</option>
+                                <option value="envoy">Envoy Air</option>
+                                <option value="psa">PSA Airlines</option>
+                                <option value="piedmont">Piedmont Airlines</option>
+                                <option value="endeavor">Endeavor Air</option>
+                                <option value="gojet">GoJet Airlines</option>
+                                <option value="compass">Compass Airlines</option>
+                                <option value="transstates">Trans States Airlines</option>
+                                <option value="republic">Republic Airways</option>
+                                <option value="skywest">SkyWest Airlines</option>
+                                <option value="expressjet">ExpressJet</option>
+                                <option value="envoy">Envoy Air</option>
+                                <option value="psa">PSA Airlines</option>
+                                <option value="piedmont">Piedmont Airlines</option>
+                                <option value="endeavor">Endeavor Air</option>
+                                <option value="gojet">GoJet Airlines</option>
+                                <option value="compass">Compass Airlines</option>
+                                <option value="transstates">Trans States Airlines</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="search-btn">
+                                <i class="fas fa-search"></i>
+                                Buscar Vuelos
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>¿Por qué elegir SkyWings?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3>Mejores Precios</h3>
+                    <p>Garantizamos los precios más bajos del mercado o te devolvemos la diferencia.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Reserva Segura</h3>
+                    <p>Tu información está protegida con encriptación SSL de 256 bits.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Soporte 24/7</h3>
+                    <p>Nuestro equipo está disponible las 24 horas para ayudarte.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h3>+100 Aerolíneas</h3>
+                    <p>Acceso a las principales aerolíneas del mundo en una sola plataforma.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Destinations -->
+    <section class="destinations" id="vuelos">
+        <div class="container">
+            <h2>Destinos Populares</h2>
+            <div class="destinations-grid">
+                <div class="destination-card">
+                    <div class="destination-info">
+                        <h3>Bogotá</h3>
+                        <p>Desde $185.000</p>
+                        <div class="destination-meta">
+                            <span><i class="fas fa-clock"></i> 1h 15m</span>
+                            <span><i class="fas fa-star"></i> 4.8</span>
+                        </div>
+                        <button class="book-btn" onclick="window.location.href='payment.html'">Reservar</button>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <div class="destination-info">
+                        <h3>Medellín</h3>
+                        <p>Desde $175.000</p>
+                        <div class="destination-meta">
+                            <span><i class="fas fa-clock"></i> 1h 15m</span>
+                            <span><i class="fas fa-star"></i> 4.9</span>
+                        </div>
+                        <button class="book-btn" onclick="window.location.href='payment.html'">Reservar</button>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <div class="destination-info">
+                        <h3>Cartagena</h3>
+                        <p>Desde $220.000</p>
+                        <div class="destination-meta">
+                            <span><i class="fas fa-clock"></i> 1h 30m</span>
+                            <span><i class="fas fa-star"></i> 4.7</span>
+                        </div>
+                        <button class="book-btn" onclick="window.location.href='payment.html'">Reservar</button>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <div class="destination-info">
+                        <h3>Miami</h3>
+                        <p>Desde $850.000</p>
+                        <div class="destination-meta">
+                            <span><i class="fas fa-clock"></i> 3h 45m</span>
+                            <span><i class="fas fa-star"></i> 4.6</span>
+                        </div>
+                        <button class="book-btn" onclick="window.location.href='payment.html'">Reservar</button>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <div class="destination-info">
+                        <h3>Madrid</h3>
+                        <p>Desde $1.850.000</p>
+                        <div class="destination-meta">
+                            <span><i class="fas fa-clock"></i> 9h 30m</span>
+                            <span><i class="fas fa-star"></i> 4.5</span>
+                        </div>
+                        <button class="book-btn" onclick="window.location.href='payment.html'">Reservar</button>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <div class="destination-info">
+                        <h3>México</h3>
+                        <p>Desde $720.000</p>
+                        <div class="destination-meta">
+                            <span><i class="fas fa-clock"></i> 4h 15m</span>
+                            <span><i class="fas fa-star"></i> 4.4</span>
+                        </div>
+                        <button class="book-btn" onclick="window.location.href='payment.html'">Reservar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offers -->
+    <section class="offers" id="ofertas">
+        <div class="container">
+            <h2>Ofertas Especiales</h2>
+            <div class="offers-grid">
+                <div class="offer-card">
+                    <div class="offer-badge">-25%</div>
+                    <h3>Vuelos Nacionales</h3>
+                    <p>Descuentos especiales en rutas nacionales</p>
+                    <div class="offer-price">
+                        <span class="old-price">$220.000</span>
+                        <span class="new-price">$165.000</span>
+                    </div>
+                    <div class="offer-timer">
+                        <span>Termina en: 2d 15h 30m</span>
+                    </div>
+                    <button class="offer-btn">Ver Ofertas</button>
+                </div>
+                <div class="offer-card">
+                    <div class="offer-badge">-20%</div>
+                    <h3>Vuelos Internacionales</h3>
+                    <p>Destinos populares con descuentos</p>
+                    <div class="offer-price">
+                        <span class="old-price">$1.850.000</span>
+                        <span class="new-price">$1.480.000</span>
+                    </div>
+                    <div class="offer-timer">
+                        <span>Termina en: 5d 8h 45m</span>
+                    </div>
+                    <button class="offer-btn">Ver Ofertas</button>
+                </div>
+                <div class="offer-card">
+                    <div class="offer-badge">-35%</div>
+                    <h3>Última Hora</h3>
+                    <p>Vuelos de última hora con grandes descuentos</p>
+                    <div class="offer-price">
+                        <span class="old-price">$850.000</span>
+                        <span class="new-price">$552.500</span>
+                    </div>
+                    <div class="offer-timer">
+                        <span>Termina en: 1d 3h 20m</span>
+                    </div>
+                    <button class="offer-btn">Ver Ofertas</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="statistics">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-target="50000">0</div>
+                    <div class="stat-label">Clientes Satisfechos</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="1000000">0</div>
+                    <div class="stat-label">Vuelos Reservados</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="150">0</div>
+                    <div class="stat-label">Destinos</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="98">0</div>
+                    <div class="stat-label">% Satisfacción</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>Lo que dicen nuestros clientes</h2>
+            <div class="testimonials-slider">
+                                 <div class="testimonial-card">
+                     <div class="testimonial-content">
+                         <p>"Excelente servicio y precios increíbles. Mi vuelo a Madrid fue perfecto y el proceso de reserva muy fácil."</p>
+                     </div>
+                     <div class="testimonial-author">
+                         <div>
+                             <h4>Carlos Mendoza</h4>
+                             <span>Viajero Frecuente</span>
+                             <div class="stars">
+                                 <i class="fas fa-star"></i>
+                                 <i class="fas fa-star"></i>
+                                 <i class="fas fa-star"></i>
+                                 <i class="fas fa-star"></i>
+                                 <i class="fas fa-star"></i>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="testimonial-card">
+                     <div class="testimonial-content">
+                         <p>"SkyWings me ayudó a encontrar el vuelo más barato a Miami. El soporte al cliente es excepcional."</p>
+                     </div>
+                     <div class="testimonial-author">
+                         <div>
+                             <h4>Ana López</h4>
+                             <span>Empresaria</span>
+                             <div class="stars">
+                                 <i class="fas fa-star"></i>
+                                 <i class="fas fa-star"></i>
+                                 <i class="fas fa-star"></i>
+                                 <i class="fas fa-star"></i>
+                                 <i class="fas fa-star"></i>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="testimonial-card">
+                     <div class="testimonial-content">
+                         <p>"Reservé mi vuelo de última hora y el proceso fue súper rápido. Definitivamente los recomiendo."</p>
+                     </div>
+                     <div class="testimonial-author">
+                         <div>
+                             <h4>Roberto Silva</h4>
+                             <span>Estudiante</span>
+                             <div class="stars">
+                                 <i class="fas fa-star"></i>
+                                 <i class="fas fa-star"></i>
+                                 <i class="fas fa-star"></i>
+                                 <i class="fas fa-star"></i>
+                                 <i class="fas fa-star"></i>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog" id="blog">
+        <div class="container">
+            <h2>Blog de Viajes</h2>
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400" alt="Blog 1">
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> 15 Dic 2024</span>
+                            <span><i class="fas fa-user"></i> Equipo SkyWings</span>
+                        </div>
+                        <h3>Los 10 Mejores Destinos para 2024</h3>
+                        <p>Descubre los destinos más populares y las mejores ofertas para el próximo año.</p>
+                        <a href="#" class="read-more">Leer más</a>
+                    </div>
+                </article>
+                <article class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=400" alt="Blog 2">
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> 12 Dic 2024</span>
+                            <span><i class="fas fa-user"></i> María García</span>
+                        </div>
+                        <h3>Consejos para Viajar con Niños</h3>
+                        <p>Todo lo que necesitas saber para hacer de tu viaje familiar una experiencia inolvidable.</p>
+                        <a href="#" class="read-more">Leer más</a>
+                    </div>
+                </article>
+                <article class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1502602898534-0ad0c4d8b5d3?w=400" alt="Blog 3">
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> 10 Dic 2024</span>
+                            <span><i class="fas fa-user"></i> Juan Pérez</span>
+                        </div>
+                        <h3>Guía Completa de Equipaje</h3>
+                        <p>Aprende a empacar de manera eficiente y evitar problemas en el aeropuerto.</p>
+                        <a href="#" class="read-more">Leer más</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <h2>Preguntas Frecuentes</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>¿Cómo puedo cancelar mi reserva?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Puedes cancelar tu reserva hasta 24 horas antes del vuelo. Contacta nuestro servicio al cliente al +57 321 781 3700 o envía un email a soporte@skywings.com.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>¿Ofrecen seguro de viaje?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sí, ofrecemos diferentes opciones de seguro de viaje que cubren cancelaciones, equipaje perdido y emergencias médicas.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>¿Puedo cambiar las fechas de mi vuelo?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Depende de la tarifa que hayas elegido. Algunas tarifas permiten cambios gratuitos, otras tienen un cargo adicional.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>¿Cómo funciona la garantía de precio más bajo?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Si encuentras el mismo vuelo a un precio menor en otra agencia, te devolvemos la diferencia más un 10% adicional.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>¡No te pierdas las mejores ofertas!</h2>
+                <p>Suscríbete a nuestro newsletter y recibe ofertas exclusivas directamente en tu email.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Tu email" required>
+                    <button type="submit">Suscribirse</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flight Results Modal -->
+    <div id="flightModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Resultados de Búsqueda</h2>
+            <div id="flightResults"></div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Iniciar Sesión</h2>
+            <form class="login-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit">Iniciar Sesión</button>
+                <p>¿No tienes cuenta? <a href="#" onclick="showRegisterForm()">Regístrate aquí</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="contacto">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SkyWings</h3>
+                    <p>Tu agencia de viajes de confianza para vuelos nacionales e internacionales. Más de 10 años conectando el mundo.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#home">Inicio</a></li>
+                        <li><a href="#vuelos">Vuelos</a></li>
+                        <li><a href="#ofertas">Ofertas</a></li>
+                        <li><a href="#destinos">Destinos</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="payment.html">Pagos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Servicios</h3>
+                    <ul>
+                        <li><a href="#">Vuelos Nacionales</a></li>
+                        <li><a href="#">Vuelos Internacionales</a></li>
+                        <li><a href="#">Paquetes Turísticos</a></li>
+                        <li><a href="#">Seguro de Viaje</a></li>
+                        <li><a href="#">Traslados</a></li>
+                    </ul>
+                </div>
+
+
+
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                                            <p><i class="fas fa-phone"></i> +57 321 781 3700</p>
+                                            <p><i class="fas fa-envelope"></i> info@skywings.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Calle 123 #45-67, Bogotá, Colombia</p>
+                    <p><i class="fas fa-clock"></i> Lun-Vie: 8AM-8PM, Sáb: 9AM-6PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 SkyWings. Todos los derechos reservados.</p>
+                    <div class="footer-links">
+                        <a href="#">Términos y Condiciones</a>
+                        <a href="#">Política de Privacidad</a>
+                        <a href="#">Cookies</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
+
