@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago Seguro - SkyWings</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✈️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-plane"></i>
+                <span>SkyWings</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Colombia.svg" alt="Bandera de Colombia" class="colombia-flag">
+            </div>
+            <div class="nav-actions">
+                <a href="index.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Volver
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Payment Section -->
+    <section class="payment-section">
+        <div class="container">
+            <div class="payment-container">
+                <!-- Flight Summary -->
+                <div class="flight-summary">
+                    <h2><i class="fas fa-plane"></i> Resumen del Vuelo</h2>
+                    <div class="flight-details">
+                        <div class="route">
+                            <div class="origin">
+                                <h3 id="originCity">Bogotá</h3>
+                                <p id="originCode">BOG</p>
+                                <span id="departDate">15 Dic 2024</span>
+                            </div>
+                            <div class="flight-line">
+                                <i class="fas fa-plane"></i>
+                            </div>
+                            <div class="destination">
+                                <h3 id="destinationCity">Miami</h3>
+                                <p id="destinationCode">MIA</p>
+                                <span id="arrivalDate">15 Dic 2024</span>
+                            </div>
+                        </div>
+                        <div class="flight-info">
+                            <div class="info-item">
+                                <span class="label">Aerolínea:</span>
+                                <span class="value" id="airlineName">Avianca</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Vuelo:</span>
+                                <span class="value" id="flightNumber">AV 123</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Clase:</span>
+                                <span class="value" id="flightClass">Económica</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Pasajeros:</span>
+                                <span class="value" id="passengersCount">2 Adultos</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Duración:</span>
+                                <span class="value" id="flightDuration">3h 45m</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="price-breakdown">
+                        <h3>Desglose de Precios</h3>
+                        <div class="price-item">
+                            <span>Precio Original</span>
+                            <span id="originalPrice">$1.700.000</span>
+                        </div>
+                        <div class="price-item discount">
+                            <span>Descuento 30%</span>
+                            <span id="discountAmount">-$510.000</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Tarifa Base (<span id="passengersCountPrice">2</span> pax)</span>
+                            <span id="basePrice">$1.190.000</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Impuestos y Cargos</span>
+                            <span id="taxes">$150.000</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Seguro de Viaje</span>
+                            <span id="insurance">$50.000</span>
+                        </div>
+                        <div class="price-item total">
+                            <span>Total a Pagar</span>
+                            <span id="totalPrice">$1.390.000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Form -->
+                <div class="payment-form">
+                    <h2><i class="fas fa-credit-card"></i> Método de Pago</h2>
+                    
+                    <!-- Payment Method Selection -->
+                    <div class="payment-methods">
+                        <div class="method-tabs">
+                            <button class="method-tab active" data-method="card">
+                                <i class="fas fa-credit-card"></i>
+                                Tarjeta de Crédito/Débito
+                            </button>
+                            <button class="method-tab" data-method="pse">
+                                <i class="fas fa-university"></i>
+                                PSE
+                            </button>
+                        </div>
+
+                        <!-- Credit/Debit Card Form -->
+                        <div class="payment-content active" id="card-payment">
+                            <form id="cardForm">
+                                <div class="form-group">
+                                    <label for="cardNumber">Número de Tarjeta</label>
+                                    <div class="card-input">
+                                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                                        <div class="card-icons">
+                                            <i class="fab fa-cc-visa"></i>
+                                            <i class="fab fa-cc-mastercard"></i>
+                                            <i class="fab fa-cc-amex"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="cardName">Nombre en la Tarjeta</label>
+                                        <input type="text" id="cardName" placeholder="Como aparece en la tarjeta" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cardType">Tipo de Tarjeta</label>
+                                        <select id="cardType" required>
+                                            <option value="">Seleccionar</option>
+                                            <option value="credit">Tarjeta de Crédito</option>
+                                            <option value="debit">Tarjeta de Débito</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="cardBank">Banco Emisor</label>
+                                    <select id="cardBank" required>
+                                        <option value="">Seleccionar banco</option>
+                                        <option value="Bancolombia">Bancolombia</option>
+                                        <option value="Banco de Bogotá">Banco de Bogotá</option>
+                                        <option value="BBVA Colombia">BBVA Colombia</option>
+                                        <option value="Banco Popular">Banco Popular</option>
+                                        <option value="Davivienda">Davivienda</option>
+                                        <option value="Colpatria">Colpatria</option>
+                                        <option value="Banco AV Villas">Banco AV Villas</option>
+                                        <option value="Banco Caja Social">Banco Caja Social</option>
+                                        <option value="Banco Agrario">Banco Agrario</option>
+                                        <option value="Banco de Occidente">Banco de Occidente</option>
+                                        <option value="Scotiabank">Scotiabank</option>
+                                        <option value="Citibank">Citibank</option>
+                                        <option value="HSBC">HSBC</option>
+                                        <option value="Banco Santander">Banco Santander</option>
+                                        <option value="Banco Falabella">Banco Falabella</option>
+                                        <option value="Banco Pichincha">Banco Pichincha</option>
+                                        <option value="Banco GNB Sudameris">Banco GNB Sudameris</option>
+                                        <option value="Banco Colmena">Banco Colmena</option>
+                                        <option value="Banco AVAL">Banco AVAL</option>
+                                        <option value="Otro">Otro</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="expiryDate">Fecha de Vencimiento</label>
+                                        <input type="text" id="expiryDate" placeholder="MM/AA" maxlength="5" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cvv">CVV</label>
+                                        <input type="text" id="cvv" placeholder="123" maxlength="4" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="installments">Cuotas</label>
+                                    <select id="installments" required>
+                                        <option value="1">1 cuota - Sin interés</option>
+                                        <option value="3">3 cuotas - Sin interés</option>
+                                        <option value="6">6 cuotas - Sin interés</option>
+                                        <option value="12">12 cuotas - 2.5% interés</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="saveCard" required>
+                                        <span class="checkmark"></span>
+                                        Guardar tarjeta para futuras compras
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="pay-btn">
+                                    <i class="fas fa-lock"></i>
+                                    Pagar <span id="cardTotalPrice">$1.390.000</span>
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- PSE Form -->
+                        <div class="payment-content" id="pse-payment">
+                            <form id="pseForm">
+                                <div class="form-group">
+                                    <label for="documentType">Tipo de Documento</label>
+                                    <select id="documentType" required>
+                                        <option value="">Seleccionar</option>
+                                        <option value="cc">Cédula de Ciudadanía</option>
+                                        <option value="ce">Cédula de Extranjería</option>
+                                        <option value="passport">Pasaporte</option>
+                                        <option value="nit">NIT</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="documentNumber">Número de Documento</label>
+                                    <input type="text" id="documentNumber" placeholder="Ingrese su número de documento" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="bank">Banco</label>
+                                    <select id="bank" required>
+                                        <option value="">Seleccionar banco</option>
+                                        <option value="bancolombia">Bancolombia</option>
+                                        <option value="banco-bogota">Banco de Bogotá</option>
+                                        <option value="banco-popular">Banco Popular</option>
+                                        <option value="davivienda">Davivienda</option>
+                                        <option value="banco-occidente">Banco de Occidente</option>
+                                        <option value="banco-av-villas">Banco AV Villas</option>
+                                        <option value="colpatria">Colpatria</option>
+                                        <option value="banco-caja-social">Banco Caja Social</option>
+                                        <option value="banco-agrario">Banco Agrario</option>
+                                        <option value="banco-union">Banco Unión</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="personType">Tipo de Persona</label>
+                                    <select id="personType" required>
+                                        <option value="">Seleccionar</option>
+                                        <option value="natural">Persona Natural</option>
+                                        <option value="juridica">Persona Jurídica</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" placeholder="Su email para confirmación" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="termsPSE" required>
+                                        <span class="checkmark"></span>
+                                        Acepto los términos y condiciones de PSE
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="pay-btn">
+                                    <i class="fas fa-university"></i>
+                                    Pagar con PSE <span id="pseTotalPrice">$1.390.000</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Info -->
+    <section class="security-info">
+        <div class="container">
+            <div class="security-grid">
+                <div class="security-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Pago Seguro</h3>
+                    <p>Transacciones protegidas con encriptación SSL de 256 bits</p>
+                </div>
+                <div class="security-item">
+                    <i class="fas fa-lock"></i>
+                    <h3>Datos Protegidos</h3>
+                    <p>Su información personal está completamente segura</p>
+                </div>
+                <div class="security-item">
+                    <i class="fas fa-credit-card"></i>
+                    <h3>Múltiples Opciones</h3>
+                    <p>Pague con tarjeta de crédito, débito o PSE</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SkyWings</h3>
+                    <p>Su agencia de viajes de confianza para vuelos nacionales e internacionales.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p><i class="fas fa-phone"></i> +57 321 781 3700</p>
+                    <p><i class="fas fa-envelope"></i> soporte@skywings.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SkyWings. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="payment.js"></script>
+</body>
+</html>
+

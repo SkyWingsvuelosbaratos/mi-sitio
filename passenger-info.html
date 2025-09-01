@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información de Pasajeros - SkyWings</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✈️</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-plane"></i>
+                <span>SkyWings</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Colombia.svg" alt="Bandera de Colombia" class="colombia-flag">
+            </div>
+            <div class="nav-actions">
+                <a href="index.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Volver
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Passenger Information Section -->
+    <section class="passenger-section">
+        <div class="container">
+            <div class="passenger-container">
+                <!-- Flight Summary -->
+                <div class="flight-summary">
+                    <h2><i class="fas fa-plane"></i> Resumen del Vuelo</h2>
+                    <div class="flight-details">
+                        <div class="route">
+                            <div class="origin">
+                                <h3 id="originCity">Bogotá</h3>
+                                <p id="originCode">BOG</p>
+                                <span id="departDate">15 Dic 2024</span>
+                            </div>
+                            <div class="flight-line">
+                                <i class="fas fa-plane"></i>
+                            </div>
+                            <div class="destination">
+                                <h3 id="destinationCity">Miami</h3>
+                                <p id="destinationCode">MIA</p>
+                                <span id="arrivalDate">15 Dic 2024</span>
+                            </div>
+                        </div>
+                        <div class="flight-info">
+                            <div class="info-item">
+                                <span class="label">Aerolínea:</span>
+                                <span class="value" id="airlineName">Avianca</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Vuelo:</span>
+                                <span class="value" id="flightNumber">AV 123</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Clase:</span>
+                                <span class="value" id="flightClass">Económica</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Pasajeros:</span>
+                                <span class="value" id="passengersCount">2 Adultos</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Duración:</span>
+                                <span class="value" id="flightDuration">3h 45m</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="price-breakdown">
+                        <h3>Desglose de Precios</h3>
+                        <div class="price-item">
+                            <span>Precio Original</span>
+                            <span id="originalPrice">$1.700.000</span>
+                        </div>
+                        <div class="price-item discount">
+                            <span>Descuento 30%</span>
+                            <span id="discountAmount">-$510.000</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Tarifa Base (<span id="passengersCountPrice">2</span> pax)</span>
+                            <span id="basePrice">$1.190.000</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Impuestos y Cargos</span>
+                            <span id="taxes">$150.000</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Seguro de Viaje</span>
+                            <span id="insurance">$50.000</span>
+                        </div>
+                        <div class="price-item total">
+                            <span>Total a Pagar</span>
+                            <span id="totalPrice">$1.390.000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Passenger Information Form -->
+                <div class="passenger-form">
+                    <h2><i class="fas fa-users"></i> Información de Pasajeros</h2>
+                    
+                    <form id="passengerForm">
+                        <div id="passengersContainer">
+                            <!-- Los formularios de pasajeros se generarán dinámicamente -->
+                        </div>
+                        
+                        <div class="contact-info">
+                            <h3><i class="fas fa-envelope"></i> Información de Contacto</h3>
+                            <div class="form-group">
+                                <label for="contactEmail">Email de Contacto</label>
+                                <input type="email" id="contactEmail" placeholder="su.email@ejemplo.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactPhone">Teléfono de Contacto</label>
+                                <input type="tel" id="contactPhone" placeholder="+57 300 123 4567" required>
+                            </div>
+                        </div>
+
+                        <div class="seat-selection">
+                            <h3><i class="fas fa-chair"></i> Selección de Asientos</h3>
+                            <div class="seat-map">
+                                <div class="seat-legend">
+                                    <div class="legend-item">
+                                        <div class="seat available"></div>
+                                        <span>Disponible</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="seat selected"></div>
+                                        <span>Seleccionado</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="seat occupied"></div>
+                                        <span>Ocupado</span>
+                                    </div>
+                                </div>
+                                <div class="airplane-layout">
+                                    <div class="airplane-cabin">
+                                        <div class="cabin-section">
+                                            <h4>Primera Clase</h4>
+                                            <div class="seat-row">
+                                                <div class="seat available" data-seat="1A" data-price="0"></div>
+                                                <div class="seat available" data-seat="1B" data-price="0"></div>
+                                                <div class="seat occupied" data-seat="1C" data-price="0"></div>
+                                                <div class="seat available" data-seat="1D" data-price="0"></div>
+                                            </div>
+                                        </div>
+                                        <div class="cabin-section">
+                                            <h4>Económica</h4>
+                                            <div class="seat-row">
+                                                <div class="seat available" data-seat="2A" data-price="25000"></div>
+                                                <div class="seat available" data-seat="2B" data-price="25000"></div>
+                                                <div class="seat occupied" data-seat="2C" data-price="25000"></div>
+                                                <div class="seat available" data-seat="2D" data-price="25000"></div>
+                                            </div>
+                                            <div class="seat-row">
+                                                <div class="seat available" data-seat="3A" data-price="25000"></div>
+                                                <div class="seat occupied" data-seat="3B" data-price="25000"></div>
+                                                <div class="seat available" data-seat="3C" data-price="25000"></div>
+                                                <div class="seat available" data-seat="3D" data-price="25000"></div>
+                                            </div>
+                                            <div class="seat-row">
+                                                <div class="seat available" data-seat="4A" data-price="25000"></div>
+                                                <div class="seat available" data-seat="4B" data-price="25000"></div>
+                                                <div class="seat available" data-seat="4C" data-price="25000"></div>
+                                                <div class="seat occupied" data-seat="4D" data-price="25000"></div>
+                                            </div>
+                                            <div class="seat-row">
+                                                <div class="seat occupied" data-seat="5A" data-price="25000"></div>
+                                                <div class="seat available" data-seat="5B" data-price="25000"></div>
+                                                <div class="seat available" data-seat="5C" data-price="25000"></div>
+                                                <div class="seat available" data-seat="5D" data-price="25000"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="selected-seats">
+                                <h4>Asientos Seleccionados:</h4>
+                                <div id="selectedSeatsList"></div>
+                                <div class="seat-total">
+                                    <span>Costo adicional por asientos: $<span id="seatTotal">0</span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" onclick="window.location.href='index.html'">
+                                <i class="fas fa-arrow-left"></i>
+                                Volver a Búsqueda
+                            </button>
+                            <button type="submit" class="btn-primary">
+                                <i class="fas fa-credit-card"></i>
+                                Continuar al Pago
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SkyWings</h3>
+                    <p>Su agencia de viajes de confianza para vuelos nacionales e internacionales.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p><i class="fas fa-phone"></i> +57 321 781 3700</p>
+                    <p><i class="fas fa-envelope"></i> soporte@skywings.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SkyWings. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="passenger-info.js"></script>
+</body>
+</html>
